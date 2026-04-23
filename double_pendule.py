@@ -26,8 +26,10 @@ mass1 = 1
 mass2 = 1
 
 def step(phi1, phi2):
-    phi1_dd = (-grav_const * (2 *mass1 + mass2)* m.sin(phi1) - mass2 * grav_const * m.sin(phi1 - 2 * phi2))
-
+	phi1_d = 0
+	phi2_d = 0
+    phi1_dd = (-grav_const * (2 *mass1 + mass2)* m.sin(phi1) - mass2 * grav_const * m.sin(phi1 - 2 * phi2) - 2 * m.sin(phi1 - phi2) * mass2 * (((phi2_d) ** 2) * length_2 + ((phi1_d) ** 2) * length_1 * m.cos(phi1 - phi2)))/ (length_1 * (2 * mass1 + mass2 - mass2 * m.cos(2 * phi1 - 2 * phi2)))
+	phi2_dd = (2 * m.sin(phi1 - phi2) * (((phi1_d) ** 2) * length_1 * (mass1 + mass2) + grav_const * (mass1 + mass2) * m.cos(phi1) + ((phi2_d) ** 2) * length_2 * mass2 * m.cos(phi1 - phi2))) / (length_2 * (2 * mass1 + mass2 - mass2 * m.cos(2 * phi1 - 2 * phi2)))
 def draw(phi1, phi2):
     h.clear()
     h.pendown()
